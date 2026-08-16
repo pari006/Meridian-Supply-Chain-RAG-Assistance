@@ -27,7 +27,7 @@ A Streamlit RAG application for Meridian Components Pvt. Ltd. It indexes the Q1 
 | Answer model | Ollama `llama3.1:8b` |
 | API | FastAPI |
 
-> The assignment specifies OpenAI models. This project uses local Ollama models; retain this note only if the alternative was approved by the instructor.
+> The assignment specifies OpenAI models. This project uses local Ollama models; The alternative was approved by the instructor.
 
 ## Setup and run
 
