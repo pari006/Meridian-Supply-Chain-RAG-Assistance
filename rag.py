@@ -27,7 +27,7 @@ load_dotenv()
 
 CHAT_MODEL = os.getenv("OLLAMA_CHAT_MODEL", "llama3.1:8b")
 TEMPERATURE = 0.1
-DEFAULT_TOP_K_PER_DOC = 3
+DEFAULT_TOP_K_PER_DOC = 2
 
 SYSTEM_PROMPT = """You are an internal procurement assistant for Meridian Components Pvt. Ltd.
 
@@ -113,7 +113,10 @@ def answer_question(question: str, top_k_per_doc: int = DEFAULT_TOP_K_PER_DOC) -
 
     completion = ollama.chat(
         model=CHAT_MODEL,
-        options={"temperature": TEMPERATURE},
+        # Four balanced chunks (two from each core document) keep the prompt small
+        # enough for a CPU-hosted model while still satisfying the assignment's
+        # 4-5 retrieved-chunk guidance. A concise output cap avoids slow essays.
+        options={"temperature": TEMPERATURE, "num_predict": 180},
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {question}"},

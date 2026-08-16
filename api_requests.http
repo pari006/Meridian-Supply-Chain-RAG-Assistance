@@ -1,0 +1,33 @@
+@baseUrl = http://127.0.0.1:8000
+
+### API status
+GET {{baseUrl}}/
+
+### Collection statistics
+GET {{baseUrl}}/stats
+
+### Ask a question
+POST {{baseUrl}}/ask
+Content-Type: application/json
+
+{
+  "question": "What is the approval authority for a purchase order worth ₹1.4 crore?",
+  "top_k": 2
+}
+
+### Ingest PDFs
+# Requires the VS Code REST Client extension.
+POST {{baseUrl}}/ingest
+Content-Type: multipart/form-data; boundary=Boundary
+
+--Boundary
+Content-Disposition: form-data; name="files"; filename="Meridian_Supply_Chain_Review_Q1_FY2025-26.pdf"
+Content-Type: application/pdf
+
+< ./data/Meridian_Supply_Chain_Review_Q1_FY2025-26.pdf
+--Boundary
+Content-Disposition: form-data; name="files"; filename="Meridian_Procurement_Policy_Handbook_v4.2.pdf"
+Content-Type: application/pdf
+
+< ./data/Meridian_Procurement_Policy_Handbook_v4.2.pdf
+--Boundary--

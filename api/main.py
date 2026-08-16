@@ -26,6 +26,16 @@ app = FastAPI(
 )
 
 
+@app.get("/")
+def root():
+    """Small landing response for visitors opening the API base URL."""
+    return {
+        "message": "Meridian Supply Chain RAG API is running.",
+        "docs": "/docs",
+        "endpoints": ["POST /ingest", "POST /ask", "GET /stats"],
+    }
+
+
 class AskRequest(BaseModel):
     question: str
     top_k: Optional[int] = 3

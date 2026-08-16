@@ -6,3 +6,5 @@ __pycache__/
 .DS_Store
 chroma_db/
 .streamlit/
+
+# Keep screenshots tracked: the assignment requires them to render in the public README.
